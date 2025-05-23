@@ -33,11 +33,12 @@ int main() {
   std::string actuator_name = "left_shoulder_roll_actuator";
   controller->AttachActuator(dcu_name, CtrlChannel::CTRL_CH1, ActuatorType::POWER_FLOW_R86,
                              actuator_name, actuator_can_id);
-
+/*
   actuator_can_id = 3;
   actuator_name = "left_shoulder_yaw_actuator";
   controller->AttachActuator(dcu_name, CtrlChannel::CTRL_CH1, ActuatorType::POWER_FLOW_R52,
                              actuator_name, actuator_can_id);
+*/                             
   // Step 3. Start the controller
 
   // Setup EtherCAT realtime thread, 90 for the priority, bind the cpu core 1
@@ -80,11 +81,11 @@ int main() {
     actuator_name = "left_shoulder_roll_actuator";
     float pos_now = controller->GetPosition(actuator_name);
     std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
-
+/*
     actuator_name = "left_shoulder_yaw_actuator";
     pos_now = controller->GetPosition(actuator_name);
     std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
-
+*/
     // phase control
     dt += 0.01;
     if (dt >= 6.28) {
