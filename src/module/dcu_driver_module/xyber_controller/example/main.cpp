@@ -52,13 +52,13 @@ int main() {
   }
 
   // Step 4. Enable All actuator
-  //ret = controller->EnableAllActuator();
-  //if (ret) {
-  //  std::cout << "Enable Actuator Success" << std::endl;
-  //} else {
-  //  std::cout << "Enable Actuator Failed" << std::endl;
-  //  return 0;
-  //}
+  ret = controller->EnableAllActuator();
+  if (ret) {
+    std::cout << "Enable Actuator Success" << std::endl;
+  } else {
+    std::cout << "Enable Actuator Failed" << std::endl;
+    return 0;
+  }
   // enable imu
   //controller->ApplyDcuImuOffset(dcu_name);
 
