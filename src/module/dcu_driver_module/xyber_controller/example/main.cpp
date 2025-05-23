@@ -79,12 +79,12 @@ int main() {
     actuator_name = "left_shoulder_roll_actuator";
     float pos_now = controller->GetPosition(actuator_name);
     auto state = controller->GetPowerState(actuator_name);
-    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << " State "<< state==ActautorState.STATE_ENABLE << std::endl;
+    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << " State "<< state==ActautorState::STATE_ENABLE << std::endl;
 
     actuator_name = "left_shoulder_yaw_actuator";
     pos_now = controller->GetPosition(actuator_name);
     state = controller->GetPowerState(actuator_name);
-    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << " State "<< state==ActautorState.STATE_ENABLE << std::endl;
+    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << " State "<< state==ActautorState::STATE_ENABLE << std::endl;
 
     // phase control
     dt += 0.01;
