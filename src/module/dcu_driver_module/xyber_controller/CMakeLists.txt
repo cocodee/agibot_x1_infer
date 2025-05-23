@@ -19,7 +19,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -Wl,--disable-new-dtags")
 
 add_subdirectory(third_party/soem)
 add_subdirectory(xyber_api)
-# add_subdirectory(example)
+add_subdirectory(example)
 
 install(SCRIPT "cmake/post_install_script.cmake")
 
