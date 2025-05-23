@@ -29,11 +29,15 @@ int main() {
 
   // Create an PowerFlow-R52 type Actuator, name it by the type and attach it on
   // the "body" DCU. Assuming its can_id is 1, and connected to the dcu channel1
-  uint8_t actuator_can_id = 1;
-  std::string actuator_name = "PowerFlowR52";
-  controller->AttachActuator(dcu_name, CtrlChannel::CTRL_CH1, ActuatorType::POWER_FLOW_R52,
+  uint8_t actuator_can_id = 2;
+  std::string actuator_name = "left_shoulder_roll_actuator";
+  controller->AttachActuator(dcu_name, CtrlChannel::CTRL_CH1, ActuatorType::POWER_FLOW_R86,
                              actuator_name, actuator_can_id);
 
+  actuator_can_id = 3;
+  actuator_name = "left_shoulder_yaw_actuator";
+  controller->AttachActuator(dcu_name, CtrlChannel::CTRL_CH1, ActuatorType::POWER_FLOW_R52,
+                             actuator_name, actuator_can_id);
   // Step 3. Start the controller
 
   // Setup EtherCAT realtime thread, 90 for the priority, bind the cpu core 1
@@ -47,6 +51,7 @@ int main() {
   }
 
   // Step 4. Enable All actuator
+  /*
   ret = controller->EnableAllActuator();
   if (ret) {
     std::cout << "Enable Actuator Success" << std::endl;
@@ -54,25 +59,31 @@ int main() {
     std::cout << "Enable Actuator Failed" << std::endl;
     return 0;
   }
+  */
   // enable imu
-  controller->ApplyDcuImuOffset(dcu_name);
+  //controller->ApplyDcuImuOffset(dcu_name);
 
   // Step 5. Control the actuator
   float dt = 0;
-  float pos_begin = controller->GetPosition(actuator_name);
+  //float pos_begin = controller->GetPosition(actuator_name);
   for (size_t i = 0; i < 100 * 30; i++) {
     // read imu
-    DcuImu imu = controller->GetDcuImuData(dcu_name);
-    std::cout << "imu: " << imu.acc[0] << ", " << imu.acc[1] << ", " << imu.acc[2] << ", "
-              << imu.gyro[0] << ", " << imu.gyro[1] << ", " << imu.gyro[2] << std::endl;
+    //DcuImu imu = controller->GetDcuImuData(dcu_name);
+    //std::cout << "imu: " << imu.acc[0] << ", " << imu.acc[1] << ", " << imu.acc[2] << ", "
+    //          << imu.gyro[0] << ", " << imu.gyro[1] << ", " << imu.gyro[2] << std::endl;
 
     // Set target position using MIT mode
-    double pos_cmd = pos_begin + 2 * sin(dt);
-    controller->SetMitCmd(actuator_name, pos_cmd, 0, 0, 0.9, 0.2);
-
+    //double pos_cmd = pos_begin + 2 * sin(dt);
+    //controller->SetMitCmd(actuator_name, pos_cmd, 0, 0, 0.9, 0.2);
+    double pos_cmd = 0;
     // read current position
+    actuator_name = "left_shoulder_yaw_actuator";
     float pos_now = controller->GetPosition(actuator_name);
-    std::cout << "Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
+    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
+
+    actuator_name = "left_shoulder_yaw_actuator";
+    pos_now = controller->GetPosition(actuator_name);
+    std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
 
     // phase control
     dt += 0.01;
