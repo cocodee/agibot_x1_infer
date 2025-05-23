@@ -288,6 +288,7 @@ void Dcu::SetPosition(const std::string& name, float pos) {
 }
 
 float Dcu::GetPosition(const std::string& name) {
+  LOG_DEBUG("GetPosition of actuator %s dcu id %u.", name.c_str(), id_);
   auto actr = GetActautor(name);
   if (!actr) return 0;
 

@@ -87,6 +87,7 @@ void PowerFlowR::SetPosition(float pos) {
 }
 
 float PowerFlowR::GetPosition() {
+  LOG_DEBUG("GetPosition of actuator %s actuator id %u", name.c_str(), id_);
   uint16_t pos = recv_buf_[0] << 8 | recv_buf_[1];
   return MitUintToFloat(pos, mit_param_.pos_min, mit_param_.pos_max, 16);
 }
