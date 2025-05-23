@@ -77,7 +77,7 @@ int main() {
     //controller->SetMitCmd(actuator_name, pos_cmd, 0, 0, 0.9, 0.2);
     double pos_cmd = 0;
     // read current position
-    actuator_name = "left_shoulder_yaw_actuator";
+    actuator_name = "left_shoulder_roll_actuator";
     float pos_now = controller->GetPosition(actuator_name);
     std::cout << actuator_name << " Position: Cmd " << pos_cmd << " Now " << pos_now << std::endl;
 
