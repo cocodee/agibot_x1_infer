@@ -35,6 +35,24 @@ target_link_directories(
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party/lib>
 )
 
+add_library(joy_stick STATIC)
+
+# Set source file of target
+target_sources(joy_stick PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/joy.cc)
+
+# Set include path of target
+target_include_directories(
+  joy_stick
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party/include>
+)
+
+target_link_directories(
+  joy_stick
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party/lib>
+)
+
 # Set link libraries of target
 find_package(std_msgs)
 find_package(sensor_msgs)
@@ -85,6 +103,10 @@ target_link_libraries(
          SDL2
          qpOASES)
 
+target_link_libraries(
+          joy_stick
+          PUBLIC SDL2
+                 qpOASES)         
 # Set test of target
 if(XYBER_X1_INFER_BUILD_TESTS AND test_files)
   add_gtest_target(TEST_TARGET ${CUR_TARGET_NAME} TEST_SRC ${test_files})
